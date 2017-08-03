@@ -1,0 +1,19 @@
+{
+  "name": "space_invaders",
+  "version": "1.0.0",
+  "description": "A simple space invaders game in javascript and p5.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "game",
+    "space",
+    "invaders"
+  ],
+  "author": "Elisabeth Seite",
+  "license": "ISC",
+  "dependencies": {
+    "p5": "^0.5.11"
+  }
+}

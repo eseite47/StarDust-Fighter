@@ -1,0 +1,31 @@
+body {
+  text-align: center;
+  padding: 10px;
+  background-image: url("./img/space.jpg");
+}
+
+h1 {
+  text-align: center;
+  color: yellowgreen;
+  font-family: 'Space Mono', monospace;
+  padding: 50px 50px 50px 50px;
+}
+
+p {
+  color: yellowgreen;
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+}
+
+ol, ul {
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:60px;
+  width:100%;
+}

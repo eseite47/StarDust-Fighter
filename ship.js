@@ -3,9 +3,10 @@ function Ship(){
   this.xdir = 0;
 
   this.show = function(){
-    fill(255);
+    fill(0,255,0);
     rectMode(CENTER);
     rect(this.x, height-20, 20, 20)
+    //img = loadImage("assets/moonwalk.jpg");
   }
 
   this.setDir= function(dir) {
@@ -13,6 +14,10 @@ function Ship(){
   }
 
   this.move = function(dir){
-    this.x += this.xdir*5;
+      this.x += this.xdir*5;
+  }
+
+  this.bounce = function(){
+    this.xdir = 0;
   }
 }

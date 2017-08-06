@@ -14,10 +14,23 @@ function draw(){
   background(00);
   ship.show();
   ship.move();
+  var edgeInvaders = false;
+  var edgeShip = false;
 
+  //Keeping the ship within the bounds of the game
+  if (ship.x > width || ship.x < 0){
+      edgeShip = true;
+  }
+
+  if(edgeShip){
+    ship.bounce();
+  }
+
+  //Creating functionalities for shooting
   for (var i = 0; i < pewpew.length; i++){
     pewpew[i].show();
     pewpew[i].move();
+
     for (var j = 0; j < invaders.length; j++){
       if (pewpew[i].hits(invaders[j])){
         invaders[j].remove();
@@ -26,36 +39,46 @@ function draw(){
     }
   }
 
-  var edge = false;
-
+  //creating functionality for invaders
   for (var i = 0; i < invaders.length; i++){
     invaders[i].show();
     invaders[i].move();
 
     if (invaders[i].x > width || invaders[i].x < 0){
-      edge = true;
+      edgeInvaders = true;
     }
   }
 
-  if(edge){
+  if(edgeInvaders){
     for (var i = 0; i < invaders.length; i++){
       invaders[i].shiftDown();
     }
   }
 
+  //Removing invaders when they get hit
   for (var i = pewpew.length-1; i >=0; i--){
     if (pewpew[i].toDelete){
       pewpew.splice(i, 1);
     }
   }
-
   for (var i = invaders.length-1; i >=0; i--){
     if (invaders[i].toDelete){
       invaders.splice(i, 1);
     }
   }
+
+  //Winning and losing functionalities
+  // if(invaders.length = 0){
+  //   invaders.youWin()
+  // }
+  for (var i = 0; i < invaders.length; i++){
+    if(invaders[i].y === height - 25){
+      invaders[i].youLose()
+    }
+  }
 }
 
+//Keyboard functionalities
 function keyReleased(){
   if (key != ' '){
     ship.setDir(0);
@@ -73,5 +96,7 @@ function keyPressed() {
   } else if (keyCode === LEFT_ARROW){
     ship.setDir(-1);
   }
+
+
 }
 

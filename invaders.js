@@ -23,4 +23,12 @@ function Invaders(x, y){
     this.xdir *= -1;
     this.y += this.r;
   }
+
+  this.youWin = function(){
+    console.log('you win!')
+  }
+
+  this.youLose = function(){
+    console.log('you lose!')
+  }
 }

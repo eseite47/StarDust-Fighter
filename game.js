@@ -52,7 +52,13 @@ function draw(){
   if(edgeInvaders){
     for (var i = 0; i < invaders.length; i++){
       invaders[i].shiftDown();
+      console.log('shifted down')
     }
+    console.log(invaders[0].y)
+    // for (var i = invaders.length+8; i >= invaders.length; i--){
+    //   invaders[i] = new Invaders(25+i*75, 50);
+    //   console.log('creation successful', invaders[i])
+    // }
   }
 
   //Removing invaders when they get hit
@@ -62,6 +68,7 @@ function draw(){
     }
   }
   for (var i = invaders.length-1; i >=0; i--){
+    //console.log(invaders[i])
     if (invaders[i].toDelete){
       invaders.splice(i, 1);
     }
@@ -72,8 +79,12 @@ function draw(){
   //   invaders.youWin()
   // }
   for (var i = 0; i < invaders.length; i++){
-    if(invaders[i].y === height - 25){
+    if(invaders[i].y > 360){
       invaders[i].youLose()
+      invaders = [];
+      loadImage("./img/lose.png", function(img) {
+    image(img, 0, 0);
+  });
     }
   }
 }

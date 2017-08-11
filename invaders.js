@@ -30,5 +30,17 @@ function Invaders(x, y){
 
   this.youLose = function(){
     console.log('you lose!')
+    this.toDelete = true;
   }
+
+  // this.newline = function(){
+  //   console.log('creation attempted', this)
+  //   console.log('this.length', this.length)
+  //   for (var i = this.length; i < this.length + 8; i++){
+  //   this[i] = new Invaders(25+i*75, 50);
+  //   console.log('new invader created')
+  //   this[i].show();
+  //   this[i].move();
+  //   }
+  // }
 }

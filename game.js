@@ -3,7 +3,7 @@ var invaders = [];
 var pewpew = [];
 
 function setup(){
-  createCanvas(600,400);
+  createCanvas(600,500);
   ship = new Ship();
   for (var i = 0; i < 8; i++){
     invaders[i] = new Invaders(25+i*75, 50);
@@ -14,8 +14,10 @@ function draw(){
   background(00);
   ship.show();
   ship.move();
+  ship.showScore()
   var edgeInvaders = false;
   var edgeShip = false;
+  var lost = false;
 
   //Keeping the ship within the bounds of the game
   if (ship.x > width || ship.x < 0){
@@ -35,6 +37,7 @@ function draw(){
       if (pewpew[i].hits(invaders[j])){
         invaders[j].remove();
         pewpew[i].remove();
+        ship.score += 10;
       }
     }
   }
@@ -52,9 +55,9 @@ function draw(){
   if(edgeInvaders){
     for (var i = 0; i < invaders.length; i++){
       invaders[i].shiftDown();
-      console.log('shifted down')
+      //console.log('shifted down')
     }
-    console.log(invaders[0].y)
+//console.log(invaders[0].y)
     // for (var i = invaders.length+8; i >= invaders.length; i--){
     //   invaders[i] = new Invaders(25+i*75, 50);
     //   console.log('creation successful', invaders[i])
@@ -74,18 +77,19 @@ function draw(){
     }
   }
 
-  //Winning and losing functionalities
-  // if(invaders.length = 0){
-  //   invaders.youWin()
-  // }
-  for (var i = 0; i < invaders.length; i++){
-    if(invaders[i].y > 360){
-      invaders[i].youLose()
-      invaders = [];
-      loadImage("./img/lose.png", function(img) {
-    image(img, 0, 0);
-  });
+  //When Winning
+  if(!invaders.length && ship.score > 0){
+    ship.youWin()
     }
+
+  //When losing
+  if(invaders[0].y > 460){
+    lost = true;
+    ship.youLose();
+  }
+
+  if(lost){
+    invaders = [];
   }
 }
 

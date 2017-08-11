@@ -24,14 +24,7 @@ function Invaders(x, y){
     this.y += this.r;
   }
 
-  this.youWin = function(){
-    console.log('you win!')
-  }
 
-  this.youLose = function(){
-    console.log('you lose!')
-    this.toDelete = true;
-  }
 
   // this.newline = function(){
   //   console.log('creation attempted', this)

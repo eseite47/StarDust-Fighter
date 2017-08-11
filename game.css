@@ -6,15 +6,27 @@ body {
 
 h1 {
   text-align: center;
-  color: yellowgreen;
-  font-family: 'Space Mono', monospace;
+  color: lime;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2.5em;
   padding: 50px 50px 50px 50px;
 }
 
-p, a {
-  color: yellowgreen;
+p {
+  color: green;
   text-align: center;
-  font-family: 'Space Mono', monospace;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.5em;
+}
+
+#score {
+  color: gold;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.25em;
+}
+
+a {
+  color: whitesmoke;
 }
 
 ol, ul {

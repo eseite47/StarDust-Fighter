@@ -1,6 +1,5 @@
 var GameState = {
 
-
   create: function(){
 
     //Static
@@ -43,6 +42,7 @@ var GameState = {
       invader.events.onInputDown.add(self.animateInvader, self)
       invader.animations.add('animate', [0, 1], 1.5, true);
       invader.customParams = {sound: self.game.add.audio('shipSound'), points: 10};
+      this.game.physics.arcade.enable(invader);
     })
 
     //Hero
@@ -51,7 +51,12 @@ var GameState = {
     this.hero.anchor.setTo(0.5, 1);
     this.hero.inputEnabled = true;
     this.hero.input.enableDrag();
+    this.game.physics.arcade.enable(this.hero);
     //this.hero.events.onInputDown.add(this.move, this)
+
+    this.pew = this.game.add.sprite(this.game.world.centerX, 670, 'pew')
+    this.pew.anchor.setTo(0.5, 1);
+    this.game.physics.arcade.enable(this.pew);
   },
 
   update: () => {

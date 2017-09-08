@@ -5,7 +5,7 @@ var GameState = {
     //Static
     this.background = this.game.add.sprite(0, 0, 'background');
 
-    const title = game.add.text(this.game.width/2, 20, 'SPACE INVADERS', {fill: '#00FF00', font: '30px Press Start 2P'})
+    const title = game.add.text(this.game.width/2, 40, 'SPACE INVADERS', {fill: '#00FF00', font: '30px Press Start 2P'})
     title.anchor.setTo(0.5, 0);
     title.visible = true;
 
@@ -36,7 +36,7 @@ var GameState = {
     let invader;
 
     invadersData.forEach((element, index) => {
-      invader = self.invaders.create(70 + index * 90, 70, 'ship');
+      invader = self.invaders.create(70 + index * 90, 100, 'ship');
       invader.anchor.setTo(0.5, 0);
       invader.inputEnabled = true;
       invader.events.onInputDown.add(self.animateInvader, self)
@@ -49,6 +49,7 @@ var GameState = {
     this.hero = this.game.add.sprite(this.game.world.centerX, 700, 'hero')
     this.hero.customParams = {direction: 1, score: 0 }
     this.hero.anchor.setTo(0.5, 1);
+    this.hero.scale.setTo(0.75)
     this.hero.inputEnabled = true;
     this.hero.input.enableDrag();
     this.game.physics.arcade.enable(this.hero);
@@ -56,10 +57,13 @@ var GameState = {
 
     this.pew = this.game.add.sprite(this.game.world.centerX, 670, 'pew')
     this.pew.anchor.setTo(0.5, 1);
+    this.pew.inputEnabled = true;
+    this.pew.input.enableDrag();
     this.game.physics.arcade.enable(this.pew);
   },
 
   update: () => {
+    //this.game.physics.arcade.collide(this.pew, this.invader, this.scoreUp);
   },
 
   animateInvader: (sprite, event) => {
@@ -79,11 +83,15 @@ var GameState = {
     newInvaderMovement.start()
     console.log('this', sprite.world.y)
 
-
   },
 
   refreshScore: () => {
     this.publicScore.text = this.hero.customParams.score
+  },
+
+  scoreUp: (pew, invader) => {
+    this.hero.customParams.score += 10;
+    invader.destroy()
   },
 
   gameOver: () => {

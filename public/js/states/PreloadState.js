@@ -6,8 +6,8 @@ var PreloadState = {
 
     this.load.image('background', './assets/img/space.jpg');
     this.load.spritesheet('ship', './assets/img/invaders.png', 34, 26, 2);
-    this.load.image('hero', './assets/img/hero.png');
-    this.load.image('pew', './assets/img/laser.png')
+    this.load.image('hero', './assets/img/hero2c.png', 72, 72, 4);
+    this.load.image('pew', './assets/img/beams.png')
 
     this.load.audio('shipSound', ['./assets/audio/shipMoves.ogg', './assets/audio/shipMoves.mp3']);
 

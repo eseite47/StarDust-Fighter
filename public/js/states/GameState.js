@@ -3,6 +3,7 @@ var GameState = {
   create: function(){
 
     //Static
+    this.cursors = this.game.input.keyboard.createCursorKeys();
     this.background = this.game.add.sprite(0, 0, 'background');
 
     const title = game.add.text(this.game.width/2, 40, 'SPACE INVADERS', {fill: '#00FF00', font: '30px Press Start 2P'})
@@ -38,8 +39,6 @@ var GameState = {
     invadersData.forEach((element, index) => {
       invader = self.invaders.create(70 + index * 90, 100, 'ship');
       invader.anchor.setTo(0.5, 0);
-      invader.inputEnabled = true;
-      invader.events.onInputDown.add(self.animateInvader, self)
       invader.animations.add('animate', [0, 1], 1.5, true);
       invader.customParams = {sound: self.game.add.audio('shipSound'), points: 10};
       this.game.physics.arcade.enable(invader);
@@ -53,17 +52,35 @@ var GameState = {
     this.hero.inputEnabled = true;
     this.hero.input.enableDrag();
     this.game.physics.arcade.enable(this.hero);
+    this.hero.body.allowGravity = false;
+    this.SPEED = 250;
     //this.hero.events.onInputDown.add(this.move, this)
 
-    this.pew = this.game.add.sprite(this.game.world.centerX, 670, 'pew')
+    this.pew = this.game.add.sprite(this.game.world.centerX, 370, 'pew')
     this.pew.anchor.setTo(0.5, 1);
     this.pew.inputEnabled = true;
     this.pew.input.enableDrag();
-    this.game.physics.arcade.enable(this.pew);
+    game.physics.arcade.enable(this.pew);
+    this.pew.body.allowGravity = false;
   },
 
-  update: () => {
-    //this.game.physics.arcade.collide(this.pew, this.invader, this.scoreUp);
+  update: function(){
+    this.game.physics.arcade.collide(this.pew, this.invaders, this.scoreUp);
+
+    this.hero.body.velocity.x = 0;
+    this.hero.body.velocity.y = 0
+    if(this.cursors.left.isDown){
+      this.hero.body.velocity.x = -this.SPEED;
+    }
+    else if (this.cursors.right.isDown){
+      this.hero.body.velocity.x = this.SPEED;
+    }
+    else if (this.cursors.up.isDown){
+      this.hero.body.velocity.y = -this.SPEED;
+    }
+    else if (this.cursors.down.isDown){
+      this.hero.body.velocity.y = this.SPEED;
+    }
   },
 
   animateInvader: (sprite, event) => {
@@ -89,8 +106,9 @@ var GameState = {
     this.publicScore.text = this.hero.customParams.score
   },
 
-  scoreUp: (pew, invader) => {
-    this.hero.customParams.score += 10;
+  scoreUp: function(pew, invader){
+    //this.hero.customParams.score += 10;
+    pew.destroy()
     invader.destroy()
   },
 

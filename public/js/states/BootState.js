@@ -4,6 +4,10 @@ var BootState = {
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.scale.pageAlignHorizontally = true;
     this.game.physics.startSystem(Phaser.Physics.ARCADE)
+    this.game.physics.arcade.gravity.y = 5;
+
+    // this.cursors = this.game.input.keyboard.createCursorKeys();
+    //this.HERO_MOVEMENT = 100;
   },
 
   preload: function(){

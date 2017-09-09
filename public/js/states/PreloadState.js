@@ -4,7 +4,7 @@ var PreloadState = {
     this.logo = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo')
     this.logo.anchor.setTo(0.5);
 
-    this.load.image('background', './assets/img/space.jpg');
+    this.load.image('background', './assets/img/starfield.png');
     this.load.spritesheet('ship', './assets/img/invaders.png', 34, 26, 2);
     this.load.image('hero', './assets/img/hero2c.png', 72, 72, 4);
     this.load.image('pew', './assets/img/beams.png')

@@ -5,7 +5,7 @@ var HomeState = {
   },
 
   create: function(){
-      const background = this.game.add.sprite(0,0, 'background');
+      // const background = this.game.add.sprite(0,0, 'background');
       const spaceBar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
       spaceBar.onDown.add(function(){
         this.state.start('GameState')

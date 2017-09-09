@@ -24,7 +24,7 @@ var HomeState = {
         font: '50px Press Start 2P'
       }
 
-      const title = game.add.text(this.game.width/2, 20, 'STARDUST FIGHTER', style)
+      const title = game.add.text(this.game.width/2, 50, 'STARDUST FIGHTER', style)
       title.anchor.setTo(0.5, 0);
       title.visible = true;
 

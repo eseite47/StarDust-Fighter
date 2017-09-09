@@ -33,7 +33,8 @@ var HomeState = {
       pressToStart.visible = true;
 
       if(this.message){
-        this.game.add.text(this.game.width/2, this.game.height/3, this.message, messageStyle)
+        let gameOver = this.game.add.text(this.game.width/2, this.game.height/3.5, this.message, messageStyle)
+        gameOver.anchor.setTo(0.5, 0);
       }
    }
 }

@@ -5,7 +5,7 @@ var BootState = {
     this.scale.pageAlignHorizontally = true;
     this.game.physics.startSystem(Phaser.Physics.ARCADE)
     this.game.physics.arcade.gravity.y = 5;
-
+    this.game.world.setBounds(0, 0, 1400, 750)
     // this.cursors = this.game.input.keyboard.createCursorKeys();
     //this.HERO_MOVEMENT = 100;
   },

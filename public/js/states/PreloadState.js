@@ -1,8 +1,6 @@
 var PreloadState = {
 
   preload: function(){
-    this.cursors = this.game.input.keyboard.createCursorKeys();
-
     this.logo = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo')
     this.logo.anchor.setTo(0.5);
 

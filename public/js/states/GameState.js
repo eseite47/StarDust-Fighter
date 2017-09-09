@@ -5,6 +5,7 @@ var GameState = {
     //Static
     this.cursors = this.game.input.keyboard.createCursorKeys();
     this.background = this.game.add.sprite(0, 0, 'background');
+    this.game.world.setBounds(0, 0, 1400, 750)
 
     const title = game.add.text(this.game.width/2, 40, 'SPACE INVADERS', {fill: '#00FF00', font: '30px Press Start 2P'})
     title.anchor.setTo(0.5, 0);
@@ -37,9 +38,10 @@ var GameState = {
     let invader;
 
     invadersData.forEach((element, index) => {
-      invader = self.invaders.create(70 + index * 90, 100, 'ship');
+      invader = self.invaders.create(70 + index * 100, 100, 'ship');
       invader.anchor.setTo(0.5, 0);
       invader.animations.add('animate', [0, 1], 1.5, true);
+      invader.play('animate')
       invader.customParams = {sound: self.game.add.audio('shipSound'), points: 10};
       this.game.physics.arcade.enable(invader);
     })
@@ -60,12 +62,14 @@ var GameState = {
     this.pew.anchor.setTo(0.5, 1);
     this.pew.inputEnabled = true;
     this.pew.input.enableDrag();
-    game.physics.arcade.enable(this.pew);
+    this.game.physics.arcade.enable(this.pew);
     this.pew.body.allowGravity = false;
   },
 
   update: function(){
     this.game.physics.arcade.collide(this.pew, this.invaders, this.scoreUp);
+
+    this.game.physics.arcade.collide(this.hero, this.invaders, this.gameOver);
 
     this.hero.body.velocity.x = 0;
     this.hero.body.velocity.y = 0
@@ -83,26 +87,7 @@ var GameState = {
     }
   },
 
-  animateInvader: (sprite, event) => {
-    sprite.play('animate')
-    //sprite.customParams.sound.play();
-    //sprite.alpha = 0.4;
-    if (this.isMoving){
-      return false
-    }
-    this.isMoving = true;
-
-    let currentInvader = sprite
-    console.log('this', currentInvader)
-    let newInvaderMovement = this.game.add.tween(currentInvader)
-    newInvaderMovement.to({y: sprite.world.y+45}, 1000)
-    newInvaderMovement.onComplete.add(() => this.isMoving = false)
-    newInvaderMovement.start()
-    console.log('this', sprite.world.y)
-
-  },
-
-  refreshScore: () => {
+  refreshScore: function(){
     this.publicScore.text = this.hero.customParams.score
   },
 
@@ -112,9 +97,10 @@ var GameState = {
     invader.destroy()
   },
 
-  gameOver: () => {
+  gameOver: function(hero, invader){
     //this.game.state.restart();
-    this.state.start('HomeState', true, false, 'GAME OVER')
+    console.log('this.state', this.state)
+    game.state.start('HomeState', true, false, 'GAME OVER')
   }
 
 };

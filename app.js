@@ -14,6 +14,6 @@ app.get('/', function(req, res, next){
   res.send('index.html');
 })
 
-app.listen(4726, function(){
+app.listen(process.env.PORT || 4726, function(){
   console.log('Listening to port 4726');
 })

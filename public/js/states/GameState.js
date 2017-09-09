@@ -9,7 +9,7 @@ var GameState = {
     this.background.autoScroll(0, 20);
     this.game.world.setBounds(0, 0, 1400, 750)
 
-    const title = game.add.text(this.game.width/2, 40, 'SPACE INVADERS', {fill: '#00FF00', font: '30px Press Start 2P'})
+    const title = game.add.text(this.game.width/2, 40, 'STARDUST FIGHTER', {fill: '#00FF00', font: '30px Press Start 2P'})
     title.anchor.setTo(0.5, 0);
     title.visible = true;
 

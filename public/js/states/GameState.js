@@ -3,7 +3,6 @@ var GameState = {
   create: function(){
 
     //Static
-    let self = this;
     this.cursors = this.game.input.keyboard.createCursorKeys();
     this.background = this.add.tileSprite(0, 0, this.game.world.width, this.game.world.height, 'background');
     this.background.autoScroll(0, 30);
@@ -18,8 +17,8 @@ var GameState = {
       fill: '#fff'
     }
     this.game.add.text( 10, 10, 'Score:', style)
-    this.publicScore = this.game.add.text( 150, 10, '', style)
-    this.publicScore.visible = true;
+    this.displayScore = this.game.add.text( 150, 10, '', style)
+    this.displayScore.visible = true;
 
     //invaders
     this.invaders = this.game.add.group();
@@ -37,6 +36,7 @@ var GameState = {
     this.hero.body.allowGravity = false;
     this.hero.body.collideWorldBounds = true;
     this.SPEED = 350;
+    this.refreshScore()
 
     //lasers
     this.lasers = this.add.group();
@@ -52,8 +52,11 @@ var GameState = {
   },
 
   update: function(){
-
-    this.game.physics.arcade.collide(this.lasers, this.invaders, this.scoreUp);
+    let self = this;
+    this.game.physics.arcade.collide(this.lasers, this.invaders, this.scoreUp, function(){
+      self.hero.customParams.score += 10;
+      self.refreshScore();
+    });
 
     this.game.physics.arcade.collide(this.hero, this.invaders, this.gameOver);
 
@@ -150,14 +153,12 @@ var GameState = {
   },
 
   refreshScore: function(){
-    this.publicScore.text = this.hero.customParams.score
+    this.displayScore.text = this.hero.customParams.score
   },
 
   scoreUp: function(pew, invader){
-    //this.hero.customParams.score += 10;
     pew.kill();
     invader.kill();
-    // this.refreshScore();
   },
 
   meteorImpact: function(element, meteor){

@@ -8,7 +8,7 @@ var GameState = {
     this.background.autoScroll(0, 30);
     this.game.world.setBounds(0, 0, 1400, 750)
 
-    const title = game.add.text(this.game.width/2, 50, 'STARDUST FIGHTER', {fill: '#00FF00', font: '30px Press Start 2P'})
+    const title = game.add.text(this.game.width / 2, 50, 'STARDUST FIGHTER', {fill: '#00FF00', font: '30px Press Start 2P'})
     title.anchor.setTo(0.5, 0);
     title.visible = true;
 
@@ -47,7 +47,7 @@ var GameState = {
 
     //Meteors
     this.meteors = this.add.group();
-    const meteorFrequency = 10;
+    const meteorFrequency = 5;
     this.meteorCreator = this.game.time.events.loop(Phaser.Timer.SECOND * meteorFrequency, this.createMeteor, this);
   },
 
@@ -69,7 +69,7 @@ var GameState = {
     this.hero.body.velocity.x = 0;
     this.hero.body.velocity.y = 0;
 
-    if(this.cursors.left.isDown){
+    if (this.cursors.left.isDown){
       this.hero.body.velocity.x = -this.SPEED;
     }
     else if (this.cursors.right.isDown){
@@ -83,7 +83,7 @@ var GameState = {
     }
 
     this.lasers.forEach(function(element){
-      if (element.y <100){
+      if (element.y < 100){
         element.kill();
       }
     }, this)
@@ -103,7 +103,7 @@ var GameState = {
   },
 
   randomStartPoint: function(){
-    return Math.floor(Math.random()*1200) +100;
+    return Math.floor(Math.random() * 1200) + 100;
   },
 
   createInvader: function(){
@@ -123,21 +123,21 @@ var GameState = {
 
   createPew: function(xCoord, yCoord){
     let pew = this.lasers.getFirstExists(false)
-    if(!pew){
+    if (!pew){
       pew = this.lasers.create(0, 0, 'pew')
       pew.anchor.setTo(0.5, 1);
       this.game.physics.arcade.enable(pew);
       pew.body.allowGravity = false;
     }
-    pew.reset(xCoord, yCoord -75);
-    pew.body.velocity.y = -100
+    pew.reset(xCoord, yCoord - 75);
+    pew.body.velocity.y = -300
   },
 
   createMeteor: function(){
     const coordX = this.randomStartPoint();
     let meteor = this.meteors.getFirstExists(false)
     if (!meteor){
-      const meteorSprite = this.getMeteorSprite()()
+      const meteorSprite = this.getMeteorSprite()
       meteor = this.meteors.create(0, 0, meteorSprite)
       meteor.anchor.setTo(0.5)
       this.game.physics.arcade.enable(meteor);
@@ -172,33 +172,24 @@ var GameState = {
   },
 
   getMeteorSprite: function(){
-    let counter = 0;
-    return function(){
-      console.log('counter in returned function', counter)
-      if (counter >= 3){
-        counter = 0
-      }
-      else if (counter === 0){
-        counter++
-        console.log('meteor 1', counter)
-        return 'meteor'
-      }
-      else if (counter === 1){
-        console.log('meteor 2')
-        counter++
-        return 'meteor2'
-      }
-      else if (counter === 2){
-        console.log('meteor 3')
-        counter++
-        return 'meteor3'
-      }
-      else{
-        console.log('else')
-        counter++
-        return 'meteor'
-      }
+    let randomSprite = Math.floor(Math.random() * 3)
+    console.log('random sprite for meteors', randomSprite)
+    if (randomSprite === 0){
+      console.log('meteor 1', randomSprite)
+      return 'meteor'
     }
-  }
+    else if (randomSprite === 1){
+      console.log('meteor 2')
+      return 'meteor2'
+    }
+    else if (randomSprite === 2){
+      console.log('meteor 3')
+      return 'meteor3'
+    }
+    else {
+      console.log('else')
+      return 'meteor'
+    }
+  },
 
 };
